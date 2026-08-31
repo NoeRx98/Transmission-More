@@ -23,12 +23,11 @@ This is **not a mockup** — everything in `production-site/` is the real, curre
 ## Files
 ```
 production-site/
-  index.html                        — main funnel page (dark theme, blue accent) — THE live page
-  light.html                        — alternate light-theme color variant, same content/logic
+  index.html                        — main funnel page (dark theme, blue accent) — THE live page,
+                                       now with a sticky nav (logo, section anchors, phone, quote CTA)
   support.js                        — bundled render runtime, DO NOT EDIT
-  config.js                         — legacy/unused, safe to delete
   netlify.toml                      — host config (publish dir, CSP header)
-  README.md                         — original deploy notes (Netlify setup, known follow-ups)
+  README.md                         — deploy notes (Netlify setup, lead payload contract, known follow-ups)
   netlify/edge-functions/lead.mjs   — serverless lead relay → GHL webhook
 
 animation-prototype/
@@ -53,9 +52,13 @@ The video clip currently used lives on Higgsfield's CDN (a CloudFront URL hardco
 
 ## Not yet done
 - The AI dismantle animation has not been merged into `production-site/index.html`. It currently only exists as a standalone prototype page. Merging it needs to happen without disturbing the existing hero copy, CTAs, vehicle-lookup dropdowns, or FAQ accordion already in `index.html`.
-- `config.js` should be deleted once confirmed nothing references it.
 - Per the production README's own "Known follow-ups": vehicle images currently load from an external bucket (should be moved into a local `images/` folder), and the FuelEconomy.gov API call in the vehicle dropdown has a 6-second timeout that must not be removed.
-- Two color variants (`index.html`, `light.html`) both still exist — pick a winner and delete the other.
+
+## Resolved since last handoff
+- Picked a winner between the two color variants: `light.html` and the unused `config.js` are deleted. `index.html` (dark/blue) is the single maintained page — it was also the one without a rendering gap: `light.html` had silently dropped the hidden honeypot input that `index.html` uses for spam filtering.
+- Added a sticky top nav (logo, Services/Our Work/Reviews/FAQ anchors, phone number, Free Quote button) since the page previously had no in-page navigation. `id="reviews"` and `id="faq"` were added to those sections for the new anchor links; `id="services"` and `id="work"` already existed.
+- Added favicon, `theme-color`, and Open Graph meta tags for a more polished, shareable page.
+- None of this touched `support.js`, the `<script data-dc-script>` logic class's action handlers (`openQuote`, `submit`, etc.), or the lead payload's field names — the GHL webhook contract is unchanged. See `production-site/README.md` → "Lead payload sent to GHL" for the exact field list your GHL workflow maps against.
 
 ## Assets
 - Fonts: Bebas Neue + DM Sans, loaded from Google Fonts (`<link>` tags in `index.html`'s `<head>`).

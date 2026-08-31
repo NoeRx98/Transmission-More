@@ -11,6 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Transmissions & More | Expert Transmission & Auto Repair in DFW</title>
 <meta name="description" content="Over 35 years of family-owned transmission and auto repair for all makes and models. Free diagnostics, free towing, ATRA-certified master technicians in Dallas-Fort Worth.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Transmissions & More | Expert Transmission & Auto Repair in DFW">
+<meta property="og:description" content="Over 35 years of family-owned transmission and auto repair. Free diagnostics, free towing, ATRA-certified master technicians in Dallas-Fort Worth.">
+<meta property="og:image" content="https://qyhdrnbvvjhvjcqrdwju.supabase.co/storage/v1/object/public/ad-uploads/15599234-94ba-4b27-9c27-0b7c7fe1ac26/funnel-media/1786310801191-egkbb5.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='58' font-family='Arial, sans-serif' font-size='26' font-weight='800' fill='%233B9EFF' text-anchor='middle' letter-spacing='1'%3ET%26M%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -37,11 +43,28 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold)!important}
 .sticky-cta .sticky-actions a,.sticky-cta .sticky-actions button{flex:1;justify-content:center;align-items:center;min-height:48px}
 }
 @media(max-width:420px){.vfields{grid-template-columns:1fr}}
+.nav-link{display:inline-block}
+@media(max-width:760px){.nav-link{display:none}}
+#services,#work,#reviews,#faq{scroll-margin-top:70px}
 </style>
 </helmet>
 
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A0A0A"/><text x="50" y="58" font-family="Arial, sans-serif" font-size="26" font-weight="800" fill="#3B9EFF" text-anchor="middle" letter-spacing="1">T&amp;M</text></svg></template>
-<div style="background:var(--gold);color:#0A0A0A;text-align:center;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Free Diagnostics &amp; Free Towing Available · Call Now: <a href="tel:9722470995" style="color:#0A0A0A;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.35)">(972) 247-0995</a></div>
+<div id="top" style="background:var(--gold);color:#0A0A0A;text-align:center;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Free Diagnostics &amp; Free Towing Available · Call Now: <a href="tel:9722470995" style="color:#0A0A0A;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.35)">(972) 247-0995</a></div>
+
+<nav style="position:sticky;top:0;z-index:110;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)">
+<div style="max-width:1180px;margin:0 auto;padding:14px clamp(18px,4vw,32px);display:flex;align-items:center;justify-content:space-between;gap:16px">
+<a href="#top" style="flex:none;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:#fff;text-transform:uppercase">Transmissions <span style="color:var(--gold)">&amp; More</span></a>
+<div style="display:flex;align-items:center;gap:clamp(16px,2.6vw,30px)">
+<a href="#services" class="nav-link" style="font-size:13px;font-weight:600;letter-spacing:.03em;color:var(--gray-light)" style-hover="color:#fff">Services</a>
+<a href="#work" class="nav-link" style="font-size:13px;font-weight:600;letter-spacing:.03em;color:var(--gray-light)" style-hover="color:#fff">Our Work</a>
+<a href="#reviews" class="nav-link" style="font-size:13px;font-weight:600;letter-spacing:.03em;color:var(--gray-light)" style-hover="color:#fff">Reviews</a>
+<a href="#faq" class="nav-link" style="font-size:13px;font-weight:600;letter-spacing:.03em;color:var(--gray-light)" style-hover="color:#fff">FAQ</a>
+<a href="tel:9722470995" class="nav-link" style="font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--gold)" style-hover="color:var(--gold-light)">(972) 247-0995</a>
+<button onClick="{{ openQuote }}" style="flex:none;background:var(--gold);color:#0A0A0A;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:11px 18px;border:none;border-radius:3px;cursor:pointer" style-hover="background:var(--gold-light)">Free Quote</button>
+</div>
+</div>
+</nav>
 
 <section style="position:relative;overflow:hidden;border-bottom:1px solid var(--line)">
 <div style="position:absolute;top:-260px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(circle,rgba(59,158,255,.13) 0%,transparent 68%);pointer-events:none"></div>
@@ -153,7 +176,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold)!important}
 </div>
 </section>
 
-<section style="padding:clamp(52px,7vw,88px) clamp(18px,4vw,32px)">
+<section id="reviews" style="padding:clamp(52px,7vw,88px) clamp(18px,4vw,32px)">
 <div style="max-width:1080px;margin:0 auto">
 <div class="rv" style="text-align:center;margin-bottom:40px">
 <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">What DFW Drivers Say</div>
@@ -187,7 +210,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold)!important}
 </div>
 </section>
 
-<section style="padding:clamp(52px,7vw,88px) clamp(18px,4vw,32px)">
+<section id="faq" style="padding:clamp(52px,7vw,88px) clamp(18px,4vw,32px)">
 <div style="max-width:720px;margin:0 auto">
 <div class="rv" style="text-align:center;margin-bottom:32px">
 <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Your Questions, Answered</div>
