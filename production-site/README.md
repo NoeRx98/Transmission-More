@@ -49,8 +49,14 @@ symptoms, preferred_contact, best_time, submitted_at, source_url
 ## Known follow-ups
 
 - Images load from an external Supabase storage bucket. Download them into an `images/` folder here and update the paths so the page never depends on storage you do not control.
+- The hero background video (`HERO_VIDEO_URL` in `index.html`'s script) is hosted on Higgsfield's CDN, the AI tool used to generate it — same "storage you don't control" concern as the Supabase images above. Download the mp4 and self-host it (e.g. a `videos/` folder here) instead of hotlinking, then update `HERO_VIDEO_URL`.
 - Vehicle dropdowns call fueleconomy.gov with a 6-second timeout and fall back to a built-in list. Do not remove that timeout.
+
+## Hero background video
+
+`index.html`'s hero section has a full-bleed, scroll-scrubbed background video: an AI-generated (Higgsfield) transmission dismantling as the visitor scrolls through the hero, driven by `initHeroVideo()` in the script section. It maps scroll position within the hero `<section>` to `video.currentTime` — scrolling back up naturally reverses the animation (no separate "reassembly" clip needed). The video is fetched and played from a `blob:` URL (same technique as `animation-prototype/Transmission Scroll Prototype - Video.dc.html`) to sidestep cross-origin `<video src>` restrictions; verify once deployed whether that's still necessary on Netlify.
 
 ## History
 
 - `light.html` (a light/cream color variant) and `config.js` (an unused legacy webhook-URL file, superseded by the `GHL_WEBHOOK_URL` env var) have been removed — `index.html` was the maintained, currently-deployed variant and is now the only one.
+- Added the scroll-scrubbed hero background video described above.
