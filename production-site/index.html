@@ -68,8 +68,10 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold)!important}
 </nav>
 
 <section style="position:relative;overflow:hidden;border-bottom:1px solid var(--line)">
+<video ref="{{ heroVideoRef }}" muted playsinline preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;pointer-events:none"></video>
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.72) 55%,rgba(10,10,10,.94) 100%);pointer-events:none"></div>
 <div style="position:absolute;top:-260px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(circle,rgba(59,158,255,.13) 0%,transparent 68%);pointer-events:none"></div>
-<div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(18px,4vw,32px) clamp(48px,7vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(32px,5vw,56px);align-items:center">
+<div style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(18px,4vw,32px) clamp(48px,7vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(32px,5vw,56px);align-items:center">
 <div class="rv on">
 <div style="display:inline-block;border:1px solid rgba(59,158,255,.4);color:var(--gold);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:6px 14px;border-radius:2px;margin-bottom:22px">ATRA-Certified Transmission Experts</div>
 <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(46px,7.4vw,86px);line-height:.92;letter-spacing:.01em;text-transform:uppercase;margin-bottom:20px">Your Vehicle Fixed Right, <span style="color:var(--gold)">The First Time.</span></h1>
@@ -522,6 +524,7 @@ const DRIVE_WORDS = /\b(4matic\+?|quattro|xdrive|sdrive|awd|4wd|rwd|fwd|4x4|hybr
 const SYMPTOMS = ["Slipping / hard shifts", "Strange noises", "Check-engine light", "Leaking fluid", "Won't move / stuck", "Something else"];
 const WINDOWS = ["Weekday mornings", "Weekday afternoons", "Weekday evenings", "Weekends", "Any time — just reach me"];
 const BASE = "https://qyhdrnbvvjhvjcqrdwju.supabase.co/storage/v1/object/public/ad-uploads/15599234-94ba-4b27-9c27-0b7c7fe1ac26/funnel-media/";
+const HERO_VIDEO_URL = "https://d2ol7oe51mr4n9.cloudfront.net/user_364mXhlVCgAvXJcnuq2MGonc7pv/cc5f6cc3-c59b-4d80-9b13-0d36e0cbbdb2.mp4";
 const GALLERY = [
   ["1786310801192-3n6wrt", "Transmission parts on the workbench"],
   ["1786310801192-iptx9u", "Close-up of a transmission assembly"],
@@ -579,9 +582,33 @@ class Component extends DCLogic {
     feJson("year")
       .then(ys => { const list = ys.filter(y => +y >= 1990); this.setState({ years: list.length ? list : this.localYears() }); })
       .catch(() => this.setState({ years: this.localYears() }));
+    this.initHeroVideo();
+  }
+
+  initHeroVideo() {
+    const video = this._heroVideoEl;
+    const section = video && video.closest("section");
+    if (!video || !section) return;
+    fetch(HERO_VIDEO_URL)
+      .then(r => r.blob())
+      .then(blob => { video.src = URL.createObjectURL(blob); video.load(); })
+      .catch(() => {});
+    const onMeta = () => {
+      const duration = video.duration || 1;
+      this._onHeroScroll = () => {
+        const rect = section.getBoundingClientRect();
+        const t = Math.min(1, Math.max(0, 1 - rect.bottom / (rect.height + window.innerHeight)));
+        try { video.currentTime = t * duration; } catch (e) {}
+      };
+      window.addEventListener("scroll", this._onHeroScroll, { passive: true });
+      window.addEventListener("resize", this._onHeroScroll);
+      this._onHeroScroll();
+    };
+    if (video.readyState >= 1) onMeta();
+    else video.addEventListener("loadedmetadata", onMeta, { once: true });
   }
   localYears() { const out = []; for (let y = 2027; y >= 1990; y--) out.push(String(y)); return out; }
-  componentWillUnmount() { window.removeEventListener("scroll", this._onScroll); if (this._mo) this._mo.disconnect(); }
+  componentWillUnmount() { window.removeEventListener("scroll", this._onScroll); if (this._mo) this._mo.disconnect(); if (this._onHeroScroll) { window.removeEventListener("scroll", this._onHeroScroll); window.removeEventListener("resize", this._onHeroScroll); } }
 
   loadMakes(year) {
     this.setState({ busy: "make", makes: [] });
@@ -763,6 +790,7 @@ class Component extends DCLogic {
 
     return {
       openQuote: () => this.openQuote(),
+      heroVideoRef: el => { this._heroVideoEl = el; },
       closeQuote: () => this.closeQuote(),
       quoteOpen: s.quoteOpen,
       stop: e => e.stopPropagation(),
