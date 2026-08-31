@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scroll-Explode Transmission — Prototype</title>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0A;font-family:system-ui,sans-serif;overflow-x:hidden}
+canvas{display:block}
+</style>
+<script type="module" src="./transmission-scroll.js"></script>
+</helmet>
+
+<div style="position:fixed;inset:0;z-index:0">
+<canvas id="gl" style="width:100%;height:100%;pointer-events:none"></canvas>
+</div>
+<div style="position:relative;z-index:1">
+
+<section style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 24px">
+<div style="display:inline-block;border:1px solid rgba(59,158,255,.4);color:#3B9EFF;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:6px 14px;border-radius:2px;margin-bottom:22px">Concept Prototype · Not Final Copy</div>
+<h1 style="color:#fff;font-size:clamp(32px,6vw,64px);font-weight:800;max-width:720px;line-height:1.05">Scroll down. Watch it come apart.</h1>
+<p style="color:#8A8A8A;font-size:16px;margin-top:16px;max-width:480px">A rotating transmission dismantles into its parts as you scroll, and reassembles as you scroll back up.</p>
+<div style="color:#555;font-size:12px;margin-top:40px;letter-spacing:.1em;text-transform:uppercase">↓ Scroll</div>
+</section>
+
+<section style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right;padding:0 8vw">
+<div style="max-width:400px">
+<div style="color:#3B9EFF;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px">Part 01</div>
+<h2 style="color:#fff;font-size:clamp(24px,4vw,38px);font-weight:800;line-height:1.1">Torque Converter</h2>
+<p style="color:#9A9A9A;font-size:15px;margin-top:12px;line-height:1.6">Separates from the housing first — it's the piece that transfers engine power into the transmission.</p>
+</div>
+</section>
+
+<section style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right;padding:0 8vw">
+<div style="max-width:400px">
+<div style="color:#3B9EFF;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px">Part 02</div>
+<h2 style="color:#fff;font-size:clamp(24px,4vw,38px);font-weight:800;line-height:1.1">Planetary Gears</h2>
+<p style="color:#9A9A9A;font-size:15px;margin-top:12px;line-height:1.6">The gearset spreads outward next, showing the mechanism that actually shifts ratios.</p>
+</div>
+</section>
+
+<section style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right;padding:0 8vw">
+<div style="max-width:400px">
+<div style="color:#3B9EFF;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px">Part 03</div>
+<h2 style="color:#fff;font-size:clamp(24px,4vw,38px);font-weight:800;line-height:1.1">Valve Body & Bolts</h2>
+<p style="color:#9A9A9A;font-size:15px;margin-top:12px;line-height:1.6">The hydraulic control unit and fasteners drift free last, leaving every major part visible at once.</p>
+</div>
+</section>
+
+<section style="min-height:100vh;background:#0A0A0A;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 24px">
+<h2 style="color:#fff;font-size:clamp(26px,4.4vw,42px);font-weight:800;max-width:640px">Fully assembled. Fully explained.</h2>
+<p style="color:#8A8A8A;font-size:15px;margin-top:14px;max-width:520px">This section has a solid background — the 3D scene sits behind it, same as the rest of a real funnel page would.</p>
+<button style="margin-top:32px;background:#3B9EFF;color:#0A0A0A;font-weight:700;padding:16px 30px;border:none;border-radius:3px;font-size:14px;letter-spacing:.03em;text-transform:uppercase;cursor:pointer">Example CTA</button>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
